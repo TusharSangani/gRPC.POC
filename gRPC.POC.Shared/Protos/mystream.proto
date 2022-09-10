@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPC.POC.Service";
+
+package mystream;
+
+// The greeting service definition.
+service MyStream {
+  // Sends a greeting
+  rpc MystreamOperation (stream MyStreamOperationRequest) returns (MyStreamOperationResponse);
+}
+
+message StartRequest {
+    string blockname =1;
+}
+
+message Chunk {
+    bytes messagedata = 1;
+}
+
+// The request message containing the bytes.
+message MyStreamOperationRequest {
+  oneof request { 
+    StartRequest startrequest = 1;
+    Chunk chunk = 2;
+  }
+}
+
+// The response message containing bytes.
+message MyStreamOperationResponse {
+  
+}
